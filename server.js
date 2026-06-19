@@ -1,9 +1,17 @@
+
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import helmet from 'helmet';
+import compression from 'compression';
 
 const app = express();
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 8080;
+
+// Security and Efficiency Middleware
+app.use(helmet());
+app.use(compression());
 
 // Resolve __dirname in ES module scope
 const __filename = fileURLToPath(import.meta.url);

@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { 
   Bike, 
   Users, 
@@ -12,7 +12,7 @@ import {
   TrendingDown
 } from 'lucide-react';
 
-export default function ActionTracker({ 
+const ActionTracker = memo(function ActionTracker({ 
   actionDefinitions, 
   loggedActions, 
   onLog, 
@@ -159,4 +159,6 @@ export default function ActionTracker({
       </div>
     </div>
   );
-}
+});
+
+export default ActionTracker;

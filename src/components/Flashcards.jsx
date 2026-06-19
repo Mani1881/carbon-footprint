@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState, memo } from 'react';
 import { HelpCircle, RefreshCw, ChevronLeft, ChevronRight, CheckCircle2, Award, BookOpen } from 'lucide-react';
 
-export default function Flashcards() {
+const Flashcards = memo(function Flashcards() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [masteredCards, setMasteredCards] = useState({});
@@ -195,4 +195,6 @@ export default function Flashcards() {
       <div className="ambient-glow-2"></div>
     </div>
   );
-}
+});
+
+export default Flashcards;

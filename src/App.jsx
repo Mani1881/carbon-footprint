@@ -5,49 +5,18 @@
  * @module App
  */
 
-import { useState, useMemo, useCallback, Suspense, lazy } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import ErrorBoundary from './components/ErrorBoundary';
 import { Leaf, BarChart3, Calculator as CalcIcon, CheckSquare, Sparkles, BookOpen } from 'lucide-react';
 import { ACTION_DEFINITIONS, DEFAULT_USER_DATA } from './constants.js';
 import { calculateEmissions, calculateActionSavings } from './utils.js';
 
-/* Code-split heavy components for better initial load performance */
-const Dashboard = lazy(() => import('./components/Dashboard'));
-const Calculator = lazy(() => import('./components/Calculator'));
-const ActionTracker = lazy(() => import('./components/ActionTracker'));
-const Flashcards = lazy(() => import('./components/Flashcards'));
+import Dashboard from './components/Dashboard';
+import Calculator from './components/Calculator';
+import ActionTracker from './components/ActionTracker';
+import Flashcards from './components/Flashcards';
 
-/**
- * Loading spinner component displayed while lazy components load.
- * @returns {React.ReactElement} Accessible loading indicator
- */
-function LoadingFallback() {
-  return (
-    <div
-      className="flex items-center justify-center p-8"
-      role="status"
-      aria-label="Loading content"
-    >
-      <div
-        className="glass-panel p-6 text-center"
-        style={{ minWidth: '200px' }}
-      >
-        <div
-          className="glow-active"
-          style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            background: 'rgba(16, 185, 129, 0.2)',
-            margin: '0 auto 1rem',
-          }}
-          aria-hidden="true"
-        />
-        <p className="text-sm text-gray-400">Loading…</p>
-      </div>
-    </div>
-  );
-}
+
 
 /**
  * Tab configuration for the main navigation.
@@ -120,7 +89,13 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <div className="app-container">
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-emerald-600 focus:text-white focus:rounded-br-lg focus:outline-none"
+      >
+        Skip to main content
+      </a>
       {/* Decorative Background Ambient Glows */}
       <div className="ambient-glow-1" aria-hidden="true"></div>
       <div className="ambient-glow-2" aria-hidden="true"></div>
@@ -171,7 +146,6 @@ export default function App() {
       {/* Main Body Grid */}
       <main id="main-content" className="container" role="main">
         <ErrorBoundary>
-          <Suspense fallback={<LoadingFallback />}>
             {activeTab === 'dashboard' && (
               <div role="tabpanel" id="tabpanel-dashboard" aria-labelledby="nav-dashboard">
                 <Dashboard 
@@ -211,7 +185,6 @@ export default function App() {
                 <Flashcards />
               </div>
             )}
-          </Suspense>
         </ErrorBoundary>
       </main>
 

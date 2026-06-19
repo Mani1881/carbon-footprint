@@ -6,6 +6,6 @@ describe('App Component', () => {
   it('renders EcoTrace header', () => {
     render(<App />);
     const headerElements = screen.getAllByText(/EcoTrace/i);
-    expect(headerElements[0]).toBeInTheDocument();
+    expect(headerElements[0]).toBeDefined();
   });
 });

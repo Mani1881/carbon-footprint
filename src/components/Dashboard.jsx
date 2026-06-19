@@ -5,7 +5,7 @@
  * @module Dashboard
  */
 
-import { useMemo, memo } from 'react';
+import { useMemo, memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { ArrowRight } from 'lucide-react';
 import {
@@ -19,6 +19,7 @@ import StatCards from './dashboard/StatCards.jsx';
 import BreakdownChart from './dashboard/BreakdownChart.jsx';
 import ComparisonsChart from './dashboard/ComparisonsChart.jsx';
 import InsightsPanel from './dashboard/InsightsPanel.jsx';
+import ExportButtons from './dashboard/ExportButtons.jsx';
 
 /**
  * Dashboard component showing the user's carbon footprint summary.
@@ -32,6 +33,7 @@ import InsightsPanel from './dashboard/InsightsPanel.jsx';
  */
 const Dashboard = memo(function Dashboard({ userData, emissions, actionSavings, setActiveTab }) {
   const { transport, energy, diet, waste, total } = emissions;
+  const dashboardRef = useRef(null);
   
   /**
    * Memoized derived metrics for stat cards and charts.
@@ -113,7 +115,7 @@ const Dashboard = memo(function Dashboard({ userData, emissions, actionSavings, 
   }, [total]);
 
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in" ref={dashboardRef}>
       {/* Hero Header Card */}
       <section aria-label="Carbon footprint summary" className="glass-panel p-6 md:p-8 mb-8 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="relative z-10 md:max-w-xl">
@@ -139,6 +141,7 @@ const Dashboard = memo(function Dashboard({ userData, emissions, actionSavings, 
             >
               Log Daily Actions
             </button>
+            <ExportButtons targetRef={dashboardRef} />
           </div>
         </div>
         

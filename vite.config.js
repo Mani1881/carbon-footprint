@@ -9,4 +9,15 @@ export default defineConfig({
     setupFiles: './src/setupTests.js',
     globals: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['lucide-react'],
+          charts: ['recharts']
+        }
+      }
+    }
+  }
 })

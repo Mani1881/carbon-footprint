@@ -663,3 +663,35 @@ circle {
   transition: stroke-dashoffset 0.35s;
   transform-origin: 50% 50%;
 }
+
+/* =========================================================
+   Accessibility Helpers (A11y)
+   ========================================================= */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+.focus\:bg-emerald-600:focus { background-color: #059669; }
+.focus\:text-white:focus { color: #ffffff; }
+.focus\:z-50:focus { z-index: 50; }
+.focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
+.focus\:rounded-br-lg:focus { border-bottom-right-radius: 0.5rem; }
